@@ -31,7 +31,7 @@
         "symfony-cmf/routing-extra-bundle": "1.0.*"
     },
     "suggest": {
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master"
+        "rmzamora/doctrine-orm-admin-bundle": "dev-rmzamora-master"
     },
     "autoload": {
         "psr-0": { "Sonata\\PageBundle": "" }
