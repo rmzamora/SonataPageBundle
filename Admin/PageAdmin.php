@@ -229,7 +229,7 @@ class PageAdmin extends Admin
         $menu->addChild(
             $this->trans('sidemenu.link_edit_page'),
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
-        );
+        )->setCurrent(true);
 
         $menu->addChild(
             $this->trans('sidemenu.link_list_blocks'),
