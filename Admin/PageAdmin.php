@@ -28,6 +28,9 @@ use Sonata\PageBundle\Model\SiteManagerInterface;
 use Sonata\CacheBundle\Cache\CacheManagerInterface;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Knp\Menu\Matcher\Matcher;
+use Knp\Menu\Matcher\Voter\UriVoter;
+use Knp\Menu\Renderer\ListRenderer;
 
 /**
  * Admin definition for the Page class
@@ -224,12 +227,13 @@ class PageAdmin extends Admin
 
         $admin = $this->isChild() ? $this->getParent() : $this;
 
+
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
             $this->trans('sidemenu.link_edit_page'),
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
-        )->setCurrent(true);
+        );
 
         $menu->addChild(
             $this->trans('sidemenu.link_list_blocks'),
