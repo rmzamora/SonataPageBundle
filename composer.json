@@ -26,15 +26,14 @@
         "sonata-project/seo-bundle": "1.*",
         "sonata-project/doctrine-extensions" : "1.*",
         "sonata-project/cache-bundle": "2.1.*",
-        "knplabs/knp-menu-bundle": "2.0.*@dev",
         "symfony-cmf/routing-bundle": "1.*@dev"
+        "sonata-project/notification-bundle": "2.2.*@dev"
     },
     "require-dev": {
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev"
     },
     "suggest": {
-        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
-        "sonata-project/notification-bundle": "2.1.*"
+        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev"
     },
     "autoload": {
         "psr-0": { "Sonata\\PageBundle": "" }
