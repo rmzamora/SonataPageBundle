@@ -22,19 +22,16 @@
         }
     ],
     "require": {
-        "symfony/symfony": ">=2.2,<2.4-dev",
-        "rmzamora/admin-bundle": "2.2.*@dev",
+        "symfony/symfony": ">=2.3,<2.4-dev",
+        "rmzamora/admin-bundle": "2.3.*@dev",
         "sonata-project/seo-bundle": "1.*",
         "sonata-project/doctrine-extensions" : "1.*",
         "sonata-project/cache-bundle": "2.1.*",
         "symfony-cmf/routing-bundle": "1.1.*@dev",
-        "rmzamora/notification-bundle": "2.2.*@dev"
+        "rmzamora/notification-bundle": "2.3.*@dev"
     },
     "require-dev": {
-        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev"
-    },
-    "suggest": {
-        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev"
+        "sonata-project/doctrine-orm-admin-bundle": "2.3.*@dev"
     },
     "autoload": {
         "psr-0": { "Sonata\\PageBundle": "" }
