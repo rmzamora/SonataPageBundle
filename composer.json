@@ -34,7 +34,6 @@
      	"rmzamora/rest-bundle": "~1.2",
         "rmzamora/doctrine-orm-admin-bundle": "~2.3"
     },
-    },
     "suggest": {
         "rmzamora/doctrine-orm-admin-bundle": "~2.3"
     },    
