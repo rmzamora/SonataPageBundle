@@ -23,11 +23,13 @@
     ],
     "require": {
         "symfony/symfony": "~2.4",
-        "sonata-project/doctrine-extensions" : "~1.0",
-        "symfony-cmf/routing-bundle": "~1.1",
-        "rmzamora/cache-bundle": "~2.2",
         "rmzamora/admin-bundle": "~2.3",
         "rmzamora/seo-bundle": "~1.1",
+        "sonata-project/doctrine-extensions" : "~1.0",        
+        "rmzamora/cache-bundle": "~2.2",
+        "rmzamora/cache": "~1.0@dev",
+        "sonata-project/core-bundle": "~2.2",
+        "symfony-cmf/routing-bundle": "~1.1",
         "rmzamora/notification-bundle": "~2.3"
     },
     "require-dev": {
