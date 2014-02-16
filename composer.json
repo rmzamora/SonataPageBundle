@@ -30,19 +30,20 @@
         "rmzamora/cache": "~1.0@dev",
         "sonata-project/core-bundle": "~2.2",
         "symfony-cmf/routing-bundle": "~1.1",
-        "rmzamora/notification-bundle": "~2.3"
+        "rmzamora/notification-bundle": "~2.3",
+        "rmzamora/rest-bundle": "~1.3",
+        "jms/serializer-bundle": "~0.13",
+        "nelmio/api-doc-bundle": "~2.4"        
     },
     "require-dev": {
-     	"rmzamora/rest-bundle": "~1.3",
         "rmzamora/doctrine-orm-admin-bundle": "~2.3"
     },
     "suggest": {
         "rmzamora/doctrine-orm-admin-bundle": "~2.3"
     },    
     "autoload": {
-        "psr-0": { "Sonata\\PageBundle": "" }
+        "psr-4": { "Sonata\\PageBundle\\": "" }
     },
-    "target-dir": "Sonata/PageBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "2.3.x-dev"
