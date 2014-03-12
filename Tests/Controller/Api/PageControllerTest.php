@@ -13,7 +13,6 @@ namespace Sonata\Test\PageBundle\Controller\Api;
 
 use Sonata\PageBundle\Controller\Api\PageController;
 
-
 /**
  * Class PageControllerTest
  *
@@ -58,24 +57,34 @@ class PageControllerTest extends \PHPUnit_Framework_TestCase
 
         $page->expects($this->once())->method('getBlocks')->will($this->returnValue(array($block)));
 
-        $this->assertEquals(array($block), $this->createPageController($page)->getPagePageblocksAction(1));
+        $this->assertEquals(array($block), $this->createPageController($page)->getPageBlocksAction(1));
     }
 
     /**
      * @param $page
      * @param $pageManager
+     * @param $blockManager
+     * @param $formFactory
      *
      * @return PageController
      */
-    public function createPageController($page = null, $pageManager = null)
+    public function createPageController($page = null, $pageManager = null, $blockManager = null, $formFactory = null)
     {
         if (null === $pageManager) {
             $pageManager = $this->getMock('Sonata\PageBundle\Model\PageManagerInterface');
         }
+        if (null === $blockManager) {
+            $blockManager = $this->getMock('Sonata\BlockBundle\Model\BlockManagerInterface');
+        }
         if (null !== $page) {
             $pageManager->expects($this->once())->method('findOneBy')->will($this->returnValue($page));
         }
+        if (null === $formFactory) {
+            $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        }
 
-        return new PageController($pageManager);
+        $backend = $this->getMock('Sonata\NotificationBundle\Backend\BackendInterface');
+
+        return new PageController($pageManager, $blockManager, $formFactory, $backend);
     }
 }
