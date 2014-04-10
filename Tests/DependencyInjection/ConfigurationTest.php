@@ -47,6 +47,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'header' => array(
                             'name'      => 'My Header',
                             'type'      => 1,
+                            'shared'    => false,
                             'blocks'    => array(),
                             'placement' => array(
                                 'x'      => 0,
@@ -59,6 +60,20 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         ),
                     ),
                 ),
+            ),
+            'assets' => array(
+                'stylesheets' => array(
+                    'bundles/sonataadmin/vendor/bootstrap/dist/css/bootstrap.min.css',
+                    'bundles/sonatapage/default.css',
+                    'bundles/sonatapage/page.css',
+                ),
+                'javascripts' => array(
+                    'bundles/sonataadmin/vendor/jquery/dist/jquery.min.js',
+
+                    'bundles/sonataadmin/vendor/bootstrap/dist/js/bootstrap.min.js',
+
+                    'bundles/sonatapage/page.js',
+                )
             ),
             'is_inline_edition_on'  => false,
             'use_streamed_response' => false,
@@ -122,6 +137,20 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     'name'       => 'default',
                     'containers' => array(),
                 ),
+            ),
+            'assets' => array(
+                'stylesheets' => array(
+                    'bundles/sonataadmin/vendor/bootstrap/dist/css/bootstrap.min.css',
+                    'bundles/sonatapage/default.css',
+                    'bundles/sonatapage/page.css',
+                ),
+                'javascripts' => array(
+                    'bundles/sonataadmin/vendor/jquery/dist/jquery.min.js',
+
+                    'bundles/sonataadmin/vendor/bootstrap/dist/js/bootstrap.min.js',
+
+                    'bundles/sonatapage/page.js',
+                )
             ),
             'is_inline_edition_on'  => false,
             'use_streamed_response' => false,
