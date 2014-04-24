@@ -47,6 +47,60 @@ class PageAdminController extends Controller
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function listAction()
+    {
+        if (!$this->getRequest()->get('filter')) {
+            return new RedirectResponse($this->admin->generateUrl('tree'));
+        }
+
+        return parent::listAction();
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function treeAction()
+    {
+        $sites = $this->get('sonata.page.manager.site')->findBy(array());
+        $pageManager = $this->get('sonata.page.manager.page');
+
+        $currentSite = null;
+        $siteId = $this->getRequest()->get('site');
+        foreach ($sites as $site) {
+            if ($siteId && $site->getId() == $siteId) {
+                $currentSite = $site;
+            } elseif (!$siteId && $site->getIsDefault()) {
+                $currentSite = $site;
+            }
+        }
+        if (!$currentSite && count($sites) == 1) {
+            $currentSite = $sites[0];
+        }
+
+        if ($currentSite) {
+            $pages = $pageManager->loadPages($currentSite);
+        } else {
+            $pages = array();
+        }
+
+        $datagrid = $this->admin->getDatagrid();
+        $formView = $datagrid->getForm()->createView();
+
+        $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+
+        return $this->render('SonataPageBundle:PageAdmin:tree.html.twig', array(
+            'action'      => 'tree',
+            'sites'       => $sites,
+            'currentSite' => $currentSite,
+            'pages'       => $pages,
+            'form'        => $formView,
+            'csrf_token'  => $this->getCsrfToken('sonata.batch'),
+        ));
+    }
+
+    /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
@@ -111,6 +165,7 @@ class PageAdminController extends Controller
         foreach ($templateContainers as $id => $container) {
             $containers[$id] = array(
                 'area' => $container,
+                'block' => false,
             );
         }
 
@@ -127,13 +182,16 @@ class PageAdminController extends Controller
                 $children[] = $block;
             }
         }
-
+        
         // searching for block defined in template which are not created
         $blockInteractor = $this->get('sonata.page.block_interactor');
+
         foreach ($containers as $id => $container) {
-            if (!isset($container['block']) && $templateContainers[$id]['shared'] === false) {
+
+            if ($container['block'] === false && $templateContainers[$id]['shared'] === false) {
                 $blockContainer = $blockInteractor->createNewContainer(array(
                     'page' => $page,
+                    'name' => $templateContainers[$id]['name'],
                     'code' => $id,
                 ));
 
@@ -174,7 +232,7 @@ class PageAdminController extends Controller
             throw new NotFoundHttpException(sprintf('unable to find the block with id : %s', $id));
         }
 
-        $blockServices = $this->get('sonata.block.manager')->getServices();
+        $blockServices = $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle');
 
         return $this->render('SonataPageBundle:PageAdmin:compose_container_show.html.twig', array(
             'blockServices' => $blockServices,

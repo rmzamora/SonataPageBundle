@@ -103,6 +103,15 @@ file that was distributed with this source code.
                                         </ul>
                                     </li>
 
+                                    {% if page is defined %}
+                                        <li>
+                                            <a href="{{ url('admin_sonata_page_page_compose', {'id': page.id}) }}">
+                                                <i class="fa fa-magic"></i>
+                                                {{ 'header.compose_page'|trans({}, 'SonataPageBundle')}}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
                                     {% if page is defined and not page.enabled %}
                                         <li><span style="padding-left: 20px; background: red;"><strong><em>{{ 'header.page_is_disabled'|trans([], 'SonataPageBundle') }}</em></strong></span></li>
                                     {% endif %}
@@ -136,13 +145,16 @@ file that was distributed with this source code.
         {% block sonata_page_asset_footer %}
             {% block page_asset_footer %} {# Deprecated block #}
                 {% if page is defined %}
-                    <script>
-                        {{ page.javascript|raw }}
-                    </script>
-
-                    <style>
-                        {{ page.stylesheet|raw }}
-                    </style>
+                    {% if page.javascript is not empty %}
+                        <script>
+                            {{ page.javascript|raw }}
+                        </script>
+                    {% endif %}
+                    {% if page.stylesheet is not empty %}
+                        <style>
+                            {{ page.stylesheet|raw }}
+                        </style>
+                    {% endif %}
                 {% endif %}
                 {#
                     These includes can be done only at this point as all blocks are loaded,

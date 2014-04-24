@@ -63,6 +63,8 @@ class PageAdmin extends Admin
         $routes->add('compose_container_show', 'compose/container/{id}', array(
             'id' => null,
         ));
+
+        $routes->add('tree', 'tree');
     }
 
     /**
@@ -179,19 +181,27 @@ class PageAdmin extends Admin
         $formMapper
             ->with($this->trans('form_page.group_main_label'))
                 ->add('templateCode', 'sonata_page_template', array('required' => true))
-                ->add('parent', 'sonata_page_selector', array(
-                    'page'          => $this->getSubject() ?: null,
-                    'site'          => $this->getSubject() ? $this->getSubject()->getSite() : null,
-                    'model_manager' => $this->getModelManager(),
-                    'class'         => $this->getClass(),
-                    'required'      => false
-                ), array(
-                    'link_parameters' => array(
-                        'siteId' => $this->getSubject() ? $this->getSubject()->getSite()->getId() : null
-                    )
-                ))
             ->end()
         ;
+
+        if ($this->getSubject() && $this->getSubject()->getParent()) {
+            $formMapper
+                ->with($this->trans('form_page.group_main_label'))
+                    ->add('parent', 'sonata_page_selector', array(
+                        'page'          => $this->getSubject() ?: null,
+                        'site'          => $this->getSubject() ? $this->getSubject()->getSite() : null,
+                        'model_manager' => $this->getModelManager(),
+                        'class'         => $this->getClass(),
+                        'required'      => false,
+                        'filter_choice' => array('hierarchy' => 'root'),
+                    ), array(
+                        'link_parameters' => array(
+                            'siteId' => $this->getSubject() ? $this->getSubject()->getSite()->getId() : null
+                        )
+                    ))
+                ->end()
+            ;
+        }
 
         if (!$this->getSubject() || !$this->getSubject()->isDynamic()) {
             $formMapper
@@ -272,6 +282,11 @@ class PageAdmin extends Admin
         $menu->addChild(
             $this->trans('sidemenu.link_compose_page'),
             array('uri' => $admin->generateUrl('compose', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('sidemenu.link_list_blocks'),
+            array('uri' => $admin->generateUrl('sonata.page.admin.block.list', array('id' => $id)))
         );
 
         $menu->addChild(
