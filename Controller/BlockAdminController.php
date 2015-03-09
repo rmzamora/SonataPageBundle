@@ -16,6 +16,7 @@ use Sonata\PageBundle\Admin\SharedBlockAdmin;
 use Sonata\PageBundle\Exception\PageNotFoundException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Block Admin Controller
@@ -25,18 +26,17 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class BlockAdminController extends Controller
 {
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
-    public function savePositionAction()
+    public function savePositionAction(Request $request = null)
     {
         if (!$this->admin->isGranted('EDIT')) {
             throw new AccessDeniedException();
         }
 
         try {
-            $params = $this->get('request')->get('disposition');
+            $params = $request->get('disposition');
 
             if (!is_array($params)) {
                 throw new HttpException(400, 'wrong parameters');
@@ -47,7 +47,7 @@ class BlockAdminController extends Controller
             $status = 200;
 
             $pageAdmin = $this->get('sonata.page.admin.page');
-            $pageAdmin->setRequest($this->get('request'));
+            $pageAdmin->setRequest($request);
             $pageAdmin->update($pageAdmin->getSubject());
         } catch (HttpException $e) {
             $status = $e->getStatusCode();
@@ -72,9 +72,10 @@ class BlockAdminController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createAction()
+    public function createAction(Request $request = null)
     {
         if (!$this->admin->isGranted('CREATE')) {
             throw new AccessDeniedException();
@@ -97,17 +98,17 @@ class BlockAdminController extends Controller
             ));
         }
 
-        return parent::createAction();
+        return parent::createAction($request);
     }
 
-    public function switchParentAction()
+    public function switchParentAction(Request $request = null)
     {
         if (!$this->admin->isGranted('EDIT')) {
             throw new AccessDeniedException();
         }
 
-        $blockId  = $this->get('request')->get('block_id');
-        $parentId = $this->get('request')->get('parent_id');
+        $blockId  = $request->get('block_id');
+        $parentId = $request->get('parent_id');
         if ($blockId === null or $parentId === null) {
             throw new HttpException(400, 'wrong parameters');
         }
@@ -129,18 +130,16 @@ class BlockAdminController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     * @throws \Sonata\PageBundle\Exception\PageNotFoundException
      */
-    public function composePreviewAction()
+    public function composePreviewAction(Request $request = null)
     {
         if (!$this->admin->isGranted('EDIT')) {
             throw new AccessDeniedException();
         }
 
-        $blockId = $this->get('request')->get('block_id');
+        $blockId = $request->get('block_id');
 
         /** @var \Sonata\PageBundle\Entity\BaseBlock $block */
         $block = $this->admin->getObject($blockId);
