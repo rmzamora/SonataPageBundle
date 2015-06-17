@@ -24,7 +24,6 @@ class BlockContextManager extends BaseBlockContextManager
      */
     protected function setDefaultSettings(OptionsResolverInterface $optionsResolver, BlockInterface $block)
     {
-	    trigger_error(__CLASS__.'::'.__METHOD__.' is deprecated since version 2.3, to be renamed in 3.0. Use '.__CLASS__.'::configureSettings instead.');
 	    $this->configureSettings($optionsResolver, $block);
     }
 
