@@ -11,10 +11,10 @@
 
 namespace Sonata\PageBundle\Block;
 
+use Sonata\BlockBundle\Block\BlockContextManager as BaseBlockContextManager;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Sonata\BlockBundle\Block\BlockContextManager as BaseBlockContextManager;
 
 class BlockContextManager extends BaseBlockContextManager
 {

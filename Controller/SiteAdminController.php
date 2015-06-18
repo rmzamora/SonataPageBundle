@@ -18,23 +18,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Site Admin controller
+ * Site Admin controller.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SiteAdminController extends Controller
 {
     /**
-     * @param Request $request
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
-    public function snapshotsAction(Request $request = null)
+    public function snapshotsAction()
     {
         if (false === $this->get('sonata.page.admin.snapshot')->isGranted('CREATE')) {
             throw new AccessDeniedException();
         }
 
-        $id = $request->get($this->admin->getIdParameter());
+        $id = $this->get('request')->get($this->admin->getIdParameter());
 
         $object = $this->admin->getObject($id);
 
@@ -44,12 +46,11 @@ class SiteAdminController extends Controller
 
         $this->admin->setSubject($object);
 
-        if ($this->get('request')->getMethod() == "POST") {
-
+        if ($this->get('request')->getMethod() == 'POST') {
             $this->get('sonata.notification.backend')
                 ->createAndPublish('sonata.page.create_snapshots', array(
                     'siteId' => $object->getId(),
-                    'mode'   => 'async'
+                    'mode'   => 'async',
                 ));
 
             $this->addFlash('sonata_flash_success', $this->admin->trans('flash_snapshots_created_success'));
@@ -59,7 +60,7 @@ class SiteAdminController extends Controller
 
         return $this->render('SonataPageBundle:SiteAdmin:create_snapshots.html.twig', array(
             'action'  => 'snapshots',
-            'object'  => $object
+            'object'  => $object,
         ));
     }
 }

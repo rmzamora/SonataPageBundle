@@ -19,15 +19,16 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Block Admin Controller
+ * Block Admin Controller.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class BlockAdminController extends Controller
 {
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function savePositionAction(Request $request = null)
     {
@@ -54,15 +55,14 @@ class BlockAdminController extends Controller
             $result = array(
                 'exception' => get_class($e),
                 'message'   => $e->getMessage(),
-                'code'      => $e->getCode()
+                'code'      => $e->getCode(),
             );
-
         } catch (\Exception $e) {
             $status = 500;
             $result = array(
                 'exception' => get_class($e),
                 'message'   => $e->getMessage(),
-                'code'      => $e->getCode()
+                'code'      => $e->getCode(),
             );
         }
 
@@ -72,7 +72,6 @@ class BlockAdminController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request = null)
@@ -83,7 +82,6 @@ class BlockAdminController extends Controller
 
         $sharedBlockAdminClass = $this->container->getParameter('sonata.page.admin.shared_block.class');
         if (!$this->admin->getParent() && get_class($this->admin) !== $sharedBlockAdminClass) {
-
             throw new PageNotFoundException('You cannot create a block without a page');
         }
 
@@ -94,7 +92,7 @@ class BlockAdminController extends Controller
                 'services'      => $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle'),
                 'base_template' => $this->getBaseTemplate(),
                 'admin'         => $this->admin,
-                'action'        => 'create'
+                'action'        => 'create',
             ));
         }
 
@@ -130,8 +128,10 @@ class BlockAdminController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws \Sonata\PageBundle\Exception\PageNotFoundException
      */
     public function composePreviewAction(Request $request = null)
     {
