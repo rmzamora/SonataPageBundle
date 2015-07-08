@@ -23,38 +23,38 @@
     ],
     "require": {
         "symfony/symfony": "~2.4",
-        "rmzamora/admin-bundle": "2.4.*",
-        "rmzamora/seo-bundle": "2.0.*",
         "sonata-project/doctrine-extensions" : "~1.0",
-        "rmzamora/cache-bundle": "~2.2",
-        "rmzamora/cache": "~1.0@dev",
         "sonata-project/core-bundle": "~2.3,>=2.3.1",
         "sonata-project/datagrid-bundle": "~2.2@dev",
         "symfony-cmf/routing-bundle": "~1.1",
-        "rmzamora/notification-bundle": "2.4.*",
         "friendsofsymfony/rest-bundle": "~1.1",
         "jms/serializer-bundle": "~0.13",
-        "nelmio/api-doc-bundle": "~2.4"
+        "nelmio/api-doc-bundle": "~2.4",
+        "rmzamora/cache-bundle": "~2.2",
+        "rmzamora/cache": "~1.0@dev",
+        "rmzamora/notification-bundle": "2.4.1.*",
+        "rmzamora/admin-bundle": "2.4.1.*",
+        "rmzamora/seo-bundle": "2.0.1.*"
     },
     "require-dev": {
-    	"rmzamora/admin-bundle": "2.4.*",
-        "rmzamora/doctrine-orm-admin-bundle": "2.4.*",
         "sonata-project/core-bundle": "~2.3,>=2.3.1",
-        "symfony/phpunit-bridge": "~2.7|~3.0"
+        "symfony/phpunit-bridge": "~2.7|~3.0",
+        "rmzamora/admin-bundle": "2.4.1.*",
+        "rmzamora/doctrine-orm-admin-bundle": "2.4.1.*"
     },
 	"conflict": {
         "jms/serializer": "<0.13",
         "cocur/slugify": "<1.0"
     },
     "suggest": {
-        "rmzamora/doctrine-orm-admin-bundle": "2.4.*"
+        "rmzamora/doctrine-orm-admin-bundle": "2.4.1.*"
     },
     "autoload": {
         "psr-4": { "Sonata\\PageBundle\\": "" }
     },
     "extra": {
         "branch-alias": {
-            "dev-2.4": "2.4.x-dev"
+            "dev-2.4.1": "2.4.1.x-dev"
         }
     }
 }
