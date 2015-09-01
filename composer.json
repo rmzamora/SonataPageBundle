@@ -34,7 +34,7 @@
         "rmzamora/cache": "~1.0@dev",
         "rmzamora/notification-bundle": "2.4.1.*",
         "rmzamora/admin-bundle": "2.4.1.*",
-        "rmzamora/seo-bundle": "2.0.1.*"
+        "rmzamora/seo-bundle": "2.4.1.*"
     },
     "require-dev": {
         "sonata-project/core-bundle": "~2.3,>=2.3.1",
