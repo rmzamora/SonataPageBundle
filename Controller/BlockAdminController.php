@@ -16,7 +16,6 @@ use Sonata\PageBundle\Exception\PageNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Block Admin Controller.
