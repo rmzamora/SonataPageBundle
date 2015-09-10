@@ -34,17 +34,16 @@
         "symfony-cmf/routing-bundle": "~1.1",
         "friendsofsymfony/rest-bundle": "~1.1",
         "jms/serializer-bundle": "~1.1",
-        "nelmio/api-doc-bundle": "~2.4"
+        "nelmio/api-doc-bundle": "~2.4",
+        "cocur/slugify": "~1.0"
     },
     "require-dev": {
-    	"rmzamora/admin-bundle": "2.5.0.*",
         "rmzamora/doctrine-orm-admin-bundle": "2.5.0.*",
-        "rmzamora/core-bundle": "2.5.0.*",
-        "symfony/phpunit-bridge": "~2.7|~3.0"
+        "symfony/phpunit-bridge": "~2.7|~3.0",
+        "fabpot/php-cs-fixer": "~0.1|~1.0"
     },
 	"conflict": {
-        "jms/serializer": "<0.13",
-        "cocur/slugify": "<1.0"
+        "jms/serializer": "<0.13"
     },
     "suggest": {
         "rmzamora/doctrine-orm-admin-bundle": "2.4.2.*"
