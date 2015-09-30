@@ -51,6 +51,11 @@ class PageAdmin extends Admin
      */
     protected $cacheManager;
 
+    protected $accessMapping = array(
+        'tree'    => 'LIST',
+        'compose' => 'EDIT',
+    );
+
     /**
      * {@inheritdoc}
      */

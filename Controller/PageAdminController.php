@@ -66,9 +66,7 @@ class PageAdminController extends Controller
      */
     public function treeAction(Request $request = null)
     {
-        if (false === $this->admin->isGranted('LIST')) {
-            throw new AccessDeniedException();
-        }
+        $this->admin->checkAccess('tree');
 
         $sites = $this->get('sonata.page.manager.site')->findBy(array());
         $pageManager = $this->get('sonata.page.manager.page');
@@ -113,9 +111,7 @@ class PageAdminController extends Controller
      */
     public function createAction(Request $request = null)
     {
-        if (false === $this->admin->isGranted('CREATE')) {
-            throw new AccessDeniedException();
-        }
+        $this->admin->checkAccess('create');
 
         if ($request->getMethod() == 'GET' && !$request->get('siteId')) {
             $sites = $this->get('sonata.page.manager.site')->findBy(array());
@@ -148,10 +144,8 @@ class PageAdminController extends Controller
      */
     public function composeAction(Request $request = null)
     {
-        if (
-            false === $this->admin->isGranted('EDIT')
-            || false === $this->get('sonata.page.admin.block')->isGranted('LIST')
-        ) {
+        $this->admin->checkAccess('compose');
+        if (false === $this->get('sonata.page.admin.block')->isGranted('LIST')) {
             throw new AccessDeniedException();
         }
 
