@@ -146,14 +146,14 @@ class PageAdmin extends Admin
 
         // define group zoning
         $formMapper
-             ->with($this->trans('form_page.group_main_label'), array('class'     => 'col-md-6'))->end()
-             ->with($this->trans('form_page.group_seo_label'), array('class'      => 'col-md-6'))->end()
-             ->with($this->trans('form_page.group_advanced_label'), array('class' => 'col-md-6'))->end()
+             ->with('form_page.group_main_label', array('class'     => 'col-md-6'))->end()
+             ->with('form_page.group_seo_label', array('class'      => 'col-md-6'))->end()
+             ->with('form_page.group_advanced_label', array('class' => 'col-md-6'))->end()
         ;
 
         if (!$this->getSubject() || (!$this->getSubject()->isInternal() && !$this->getSubject()->isError())) {
             $formMapper
-                ->with($this->trans('form_page.group_main_label'))
+                ->with('form_page.group_main_label')
                     ->add('url', 'text', array('attr' => array('readonly' => 'readonly')))
                 ->end()
             ;
@@ -161,14 +161,14 @@ class PageAdmin extends Admin
 
         if ($this->hasSubject() && !$this->getSubject()->getId()) {
             $formMapper
-                ->with($this->trans('form_page.group_main_label'))
+                ->with('form_page.group_main_label')
                     ->add('site', null, array('required' => true, 'read_only' => true))
                 ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('form_page.group_main_label'))
+            ->with('form_page.group_main_label')
                 ->add('name')
                 ->add('enabled', null, array('required' => false))
                 ->add('position')
@@ -184,14 +184,14 @@ class PageAdmin extends Admin
         }
 
         $formMapper
-            ->with($this->trans('form_page.group_main_label'))
+            ->with('form_page.group_main_label')
                 ->add('templateCode', 'sonata_page_template', array('required' => true))
             ->end()
         ;
 
         if (!$this->getSubject() || ($this->getSubject() && $this->getSubject()->getParent()) || ($this->getSubject() && !$this->getSubject()->getId())) {
             $formMapper
-                ->with($this->trans('form_page.group_main_label'))
+                ->with('form_page.group_main_label')
                     ->add('parent', 'sonata_page_selector', array(
                         'page'          => $this->getSubject() ?: null,
                         'site'          => $this->getSubject() ? $this->getSubject()->getSite() : null,
@@ -211,7 +211,7 @@ class PageAdmin extends Admin
 
         if (!$this->getSubject() || !$this->getSubject()->isDynamic()) {
             $formMapper
-                ->with($this->trans('form_page.group_main_label'))
+                ->with('form_page.group_main_label')
                     ->add('pageAlias', null, array('required' => false))
                     ->add('target', 'sonata_page_selector', array(
                         'page'          => $this->getSubject() ?: null,
@@ -232,7 +232,7 @@ class PageAdmin extends Admin
 
         if (!$this->getSubject() || !$this->getSubject()->isHybrid()) {
             $formMapper
-                ->with($this->trans('form_page.group_seo_label'))
+                ->with('form_page.group_seo_label')
                     ->add('slug', 'text',  array('required'     => false))
                     ->add('customUrl', 'text', array('required' => false))
                 ->end()
@@ -240,7 +240,7 @@ class PageAdmin extends Admin
         }
 
         $formMapper
-            ->with($this->trans('form_page.group_seo_label'), array('collapsed' => true))
+            ->with('form_page.group_seo_label', array('collapsed' => true))
                 ->add('title', null, array('required'                           => false))
                 ->add('metaKeyword', 'textarea', array('required'               => false))
                 ->add('metaDescription', 'textarea', array('required'           => false))
@@ -249,14 +249,14 @@ class PageAdmin extends Admin
 
         if ($this->hasSubject() && !$this->getSubject()->isCms()) {
             $formMapper
-                ->with($this->trans('form_page.group_advanced_label'), array('collapsed' => true))
+                ->with('form_page.group_advanced_label', array('collapsed' => true))
                     ->add('decorate', null,  array('required'                            => false))
                 ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('form_page.group_advanced_label'), array('collapsed' => true))
+            ->with('form_page.group_advanced_label', array('collapsed' => true))
                 ->add('javascript', null,  array('required'                          => false))
                 ->add('stylesheet', null, array('required'                           => false))
                 ->add('rawHeaders', null, array('required'                           => false))
