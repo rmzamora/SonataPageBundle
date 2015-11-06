@@ -15,7 +15,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\PageBundle\CmsManager\CmsManagerSelectorInterface;
 use Sonata\PageBundle\Exception\PageNotFoundException;
 use Sonata\PageBundle\Site\SiteSelectorInterface;
@@ -30,15 +29,21 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class ChildrenPagesBlockService extends BaseBlockService
 {
+    /**
+     * @var SiteSelectorInterface
+     */
     protected $siteSelector;
 
+    /**
+     * @var CmsManagerSelectorInterface
+     */
     protected $cmsManagerSelector;
 
     /**
-     * @param string                                                    $name
-     * @param \Symfony\Component\Templating\EngineInterface             $templating
-     * @param \Sonata\PageBundle\Site\SiteSelectorInterface             $siteSelector
-     * @param \Sonata\PageBundle\CmsManager\CmsManagerSelectorInterface $cmsManagerSelector
+     * @param string                      $name
+     * @param EngineInterface             $templating
+     * @param SiteSelectorInterface       $siteSelector
+     * @param CmsManagerSelectorInterface $cmsManagerSelector
      */
     public function __construct($name, EngineInterface $templating, SiteSelectorInterface $siteSelector, CmsManagerSelectorInterface $cmsManagerSelector)
     {
@@ -74,14 +79,6 @@ class ChildrenPagesBlockService extends BaseBlockService
             'block'    => $blockContext->getBlock(),
             'settings' => $settings,
         ), $response);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
-    {
-        // TODO: Implement validateBlock() method.
     }
 
     /**

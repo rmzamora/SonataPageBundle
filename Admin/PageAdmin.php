@@ -24,6 +24,7 @@ use Sonata\PageBundle\Exception\InternalErrorException;
 use Sonata\PageBundle\Exception\PageNotFoundException;
 use Sonata\PageBundle\Model\PageInterface;
 use Sonata\PageBundle\Model\PageManagerInterface;
+use Sonata\PageBundle\Model\SiteInterface;
 use Sonata\PageBundle\Model\SiteManagerInterface;
 use Knp\Menu\Matcher\Matcher;
 use Knp\Menu\Matcher\Voter\UriVoter;
@@ -51,6 +52,9 @@ class PageAdmin extends Admin
      */
     protected $cacheManager;
 
+    /**
+     * {@inheritdoc}
+     */
     protected $accessMapping = array(
         'tree'    => 'LIST',
         'compose' => 'EDIT',
@@ -177,7 +181,7 @@ class PageAdmin extends Admin
 
         if ($this->hasSubject() && !$this->getSubject()->isInternal()) {
             $formMapper
-                ->with($this->trans('form_page.group_main_label'))
+                ->with('form_page.group_main_label')
                     ->add('type', 'sonata_page_type_choice', array('required' => false))
                 ->end()
             ;
@@ -343,7 +347,7 @@ class PageAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\PageBundle\Model\PageManagerInterface $pageManager
+     * @param PageManagerInterface $pageManager
      */
     public function setPageManager(PageManagerInterface $pageManager)
     {
@@ -436,7 +440,7 @@ class PageAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\PageBundle\Model\SiteManagerInterface $siteManager
+     * @param SiteManagerInterface $siteManager
      */
     public function setSiteManager(SiteManagerInterface $siteManager)
     {
@@ -444,7 +448,7 @@ class PageAdmin extends Admin
     }
 
     /**
-     * @return array
+     * @return SiteInterface[]
      */
     public function getSites()
     {
@@ -452,7 +456,7 @@ class PageAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\Cache\CacheManagerInterface $cacheManager
+     * @param CacheManagerInterface $cacheManager
      */
     public function setCacheManager(CacheManagerInterface $cacheManager)
     {

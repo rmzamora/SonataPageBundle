@@ -14,6 +14,7 @@ namespace Sonata\PageBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -27,9 +28,9 @@ class PageAdminController extends Controller
     /**
      * @param mixed $query
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      *
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws AccessDeniedException
      */
     public function batchActionSnapshot($query)
     {
@@ -48,8 +49,7 @@ class PageAdminController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * {@inheritdoc}
      */
     public function listAction(Request $request = null)
     {
@@ -61,8 +61,9 @@ class PageAdminController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request|null $request
+     *
+     * @return Response
      */
     public function treeAction(Request $request = null)
     {
@@ -106,8 +107,7 @@ class PageAdminController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * {@inheritdoc}
      */
     public function createAction(Request $request = null)
     {
@@ -139,8 +139,12 @@ class PageAdminController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request|null $request
+     *
+     * @return Response
+     *
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
      */
     public function composeAction(Request $request = null)
     {
@@ -215,8 +219,12 @@ class PageAdminController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request|null $request
+     *
+     * @return Response
+     *
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
      */
     public function composeContainerShowAction(Request $request = null)
     {
@@ -224,7 +232,7 @@ class PageAdminController extends Controller
             throw new AccessDeniedException();
         }
 
-        $id    =$request->get($this->admin->getIdParameter());
+        $id    = $request->get($this->admin->getIdParameter());
         $block = $this->get('sonata.page.admin.block')->getObject($id);
         if (!$block) {
             throw new NotFoundHttpException(sprintf('unable to find the block with id : %s', $id));
