@@ -104,7 +104,9 @@ class PageAdmin extends Admin
             ->addIdentifier('name')
             ->add('type')
             ->add('pageAlias')
-            ->add('site')
+            ->add('site', null, array(
+                'sortable' => 'site.name',
+            ))
             ->add('decorate', null, array('editable' => true))
             ->add('enabled', null, array('editable' => true))
             ->add('edited', null, array('editable' => true))
