@@ -14,6 +14,7 @@ namespace Sonata\PageBundle\Form\Type;
 use Sonata\PageBundle\Page\TemplateManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Select a template.
@@ -46,6 +47,14 @@ class TemplateChoiceType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
      * @return string[]
      */
     public function getTemplates()
@@ -69,8 +78,16 @@ class TemplateChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sonata_page_template';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }
