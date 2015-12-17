@@ -90,7 +90,6 @@ abstract class BaseBlockAdmin extends Admin
     public function getObject($id)
     {
         $subject = parent::getObject($id);
-
         if ($subject) {
             return $this->loadBlockDefaults($subject);
         }
@@ -104,7 +103,7 @@ abstract class BaseBlockAdmin extends Admin
     public function getNewInstance()
     {
         $block =  parent::getNewInstance();
-        $block->setType($this->getPersistentParameter('type'));
+        $block->setType($this->getPersistentParameter('type') ?: 'sonata.block.service.text');
 
         return $this->loadBlockDefaults($block);
     }
