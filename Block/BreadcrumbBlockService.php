@@ -18,6 +18,7 @@ use Sonata\PageBundle\CmsManager\CmsManagerSelectorInterface;
 use Sonata\PageBundle\Model\PageInterface;
 use Sonata\SeoBundle\Block\Breadcrumb\BaseBreadcrumbMenuBlockService;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Sonata\CoreBundle\Model\Metadata;
 
 /**
  * BlockService for homepage breadcrumb.
@@ -106,5 +107,15 @@ class BreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
         $cms  = $this->cmsSelector->retrieve();
 
         return $cms->getCurrentPage();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockMetadata($code = null)
+    {
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataPageBundle', array(
+            'class' => 'fa fa-bars',
+        ));
     }
 }

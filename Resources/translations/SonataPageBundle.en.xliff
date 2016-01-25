@@ -778,19 +778,19 @@
       <trans-unit id="193" resname="page.composer_preview_error">
           <source>page.composer_preview_error</source>
           <target>An error occured while fetching block preview.</target>
-      </trans-unit>    
+      </trans-unit>
       <trans-unit id="194" resname="page.composer_update_saving">
           <source>page.composer_update_saving</source>
           <target>Saving block positions…</target>
-      </trans-unit>      
+      </trans-unit>
       <trans-unit id="195" resname="page.composer_update_saved">
           <source>page.composer_update_saved</source>
           <target>Block positions saved</target>
-      </trans-unit>    
+      </trans-unit>
       <trans-unit id="196" resname="page.composer_update_error">
           <source>page.composer_update_error</source>
           <target>A error occured while saving block positions.</target>
-      </trans-unit>    
+      </trans-unit>
       <trans-unit id="197" resname="page.composer_status_error">
           <source>page.composer_status_error</source>
           <target>An error occured while saving block enabled status.</target>
@@ -906,6 +906,10 @@
       <trans-unit id="225" resname="form.label_menu_template">
           <source>form.label_menu_template</source>
           <target>Menu template</target>
+      </trans-unit>
+      <trans-unit id="226" resname="sonata.page.block.breadcrumb">
+          <source>sonata.page.block.breadcrumb</source>
+          <target>Breadcrumb</target>
       </trans-unit>
     </body>
   </file>
