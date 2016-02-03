@@ -99,8 +99,6 @@ class BlockAdmin extends BaseBlockAdmin
             }
         }
 
-        $blockType = $block->getType();
-
         $isComposer = $this->hasRequest() ? $this->getRequest()->get('composer', false) : false;
         $generalGroupOptions = $optionsGroupOptions = array();
         if ($isComposer) {
@@ -118,8 +116,15 @@ class BlockAdmin extends BaseBlockAdmin
 
         $formMapper->end();
 
-        $isContainerRoot = $block && in_array($blockType, array('sonata.page.block.container', 'sonata.block.service.container')) && !$this->hasParentFieldDescription();
-        $isStandardBlock = $block && !in_array($blockType, array('sonata.page.block.container', 'sonata.block.service.container')) && !$this->hasParentFieldDescription();
+
+        if ($block) {
+            $blockType = $block->getType();
+            $isContainerRoot = $block && in_array($blockType, array('sonata.page.block.container', 'sonata.block.service.container')) && !$this->hasParentFieldDescription();
+            $isStandardBlock = $block && !in_array($blockType, array('sonata.page.block.container', 'sonata.block.service.container')) && !$this->hasParentFieldDescription();
+        } else {
+            $isContainerRoot = false;
+            $isStandardBlock = false;
+        }
 
         if ($isContainerRoot || $isStandardBlock) {
             $formMapper->with('form.field_group_general', $generalGroupOptions);
