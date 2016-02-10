@@ -69,7 +69,7 @@ class Transformer implements TransformerInterface
         $snapshot = $this->snapshotManager->create();
 
         $snapshot->setPage($page);
-        $snapshot->setUrl($page->getUrl());
+        $snapshot->setUrl($page->getUrlFromPage());
         $snapshot->setEnabled($page->getEnabled());
         $snapshot->setRouteName($page->getRouteName());
         $snapshot->setPageAlias($page->getPageAlias());

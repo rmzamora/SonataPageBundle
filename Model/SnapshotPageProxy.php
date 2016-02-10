@@ -654,6 +654,14 @@ class SnapshotPageProxy implements PageInterface, Serializable
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getUrlFromPage()
+    {
+        return $this->page->getUrlFromPage();
+    }
+
+    /**
      * Returns a string representation.
      *
      * @return string

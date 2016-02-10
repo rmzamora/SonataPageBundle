@@ -913,6 +913,16 @@ abstract class Page implements PageInterface
     }
 
     /**
+     * Returns the Url from a Page object.
+     *
+     * @return string
+     */
+    public function getUrlFromPage()
+    {
+        return $this->getCustomUrl() ? $this->getCustomUrl() : $this->getUrl();
+    }
+
+    /**
      * Converts the headers passed as string to an array.
      *
      * @param string $rawHeaders The headers

@@ -201,9 +201,9 @@ class CmsPageRouter implements ChainedRouterInterface
             return $this->router->generate($page->getRouteName(), $parameters, $referenceType);
         }
 
-        $url = $this->getUrlFromPage($page);
+        $url = $page->getUrlFromPage();
 
-        if ($url === false) {
+        if (!$url) {
             throw new \RuntimeException(sprintf('Page "%d" has no url or customUrl.', $page->getId()));
         }
 
