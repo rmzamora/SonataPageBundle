@@ -91,7 +91,7 @@ EOF;
             ->end()
             ->scalarNode('slugify_service')
                 ->info('You should use: sonata.core.slugify.cocur, but for BC we keep \'sonata.core.slugify.native\' as default')
-                ->defaultValue('sonata.core.slugify.native')
+                ->defaultValue('sonata.core.slugify.cocur')
             ->end()
             ->arrayNode('ignore_routes')
                 ->defaultValue(array(

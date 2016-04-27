@@ -165,6 +165,7 @@ class SharedBlockBlockService extends BaseBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'blockId'  => null,
             'template' => 'SonataPageBundle:Block:block_shared_block.html.twig',
         ));
     }
