@@ -86,6 +86,7 @@ class SnapshotAdmin extends Admin
         $actions['toggle_enabled'] = array(
             'label'            => $this->trans('toggle_enabled'),
             'ask_confirmation' => true,
+            'translation_domain' => 'SonataPageBundle',
         );
 
         return $actions;

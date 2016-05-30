@@ -436,6 +436,7 @@ class PageAdmin extends Admin
         $actions['snapshot'] = array(
             'label'            => $this->trans('create_snapshot'),
             'ask_confirmation' => true,
+            'translation_domain' => 'SonataPageBundle',
         );
 
         return $actions;
