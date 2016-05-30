@@ -28,9 +28,9 @@ class PageAdminController extends Controller
     /**
      * @param mixed $query
      *
-     * @return RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @throws AccessDeniedException
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function batchActionSnapshot($query)
     {

@@ -23,9 +23,6 @@ use Sonata\PageBundle\Entity\BaseBlock;
  */
 class SharedBlockAdmin extends BaseBlockAdmin
 {
-    /**
-     * @var string
-     */
     protected $classnameLabel = 'shared_block';
 
     /**
@@ -71,12 +68,12 @@ class SharedBlockAdmin extends BaseBlockAdmin
         }
 
         $formMapper
-            ->with('form.field_group_general')
+            ->with($this->trans('form.field_group_general'))
                 ->add('name', null, array('required' => true))
                 ->add('enabled')
             ->end();
 
-        $formMapper->with('form.field_group_options');
+        $formMapper->with($this->trans('form.field_group_options'));
 
         /** @var BaseBlockService $service */
         $service = $this->blockManager->get($block);
@@ -91,7 +88,7 @@ class SharedBlockAdmin extends BaseBlockAdmin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc).
      */
     public function createQuery($context = 'list')
     {
